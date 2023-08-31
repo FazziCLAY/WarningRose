@@ -88,7 +88,7 @@ public class Rose {
         int h = (int) ((durationInMillis / (1000 * 60 * 60)) % 24);
         int m = (int) ((durationInMillis / (1000 * 60)) % 60);
         int s = (int) ((durationInMillis / 1000) % 60);
-        return "%s days %02d:%02d:%02d".formatted((int)Math.floor(elapsedDays()), h, m, s);
+        return String.format("%s days %02d:%02d:%02d", ((int)Math.floor(elapsedDays())), h, m, s);
     }
 
     public String getCurrentWeekday() {
