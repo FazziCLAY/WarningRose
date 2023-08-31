@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="WarningRose:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/WarningRose_jar</output-path>
+    <root id="root">
+      <element id="archive" name="WarningRose.jar">
+        <element id="module-output" name="WarningRose" />
+      </element>
+    </root>
+  </artifact>
+</component>
