@@ -34,6 +34,9 @@ public class Rose {
     private final Calendar endCalendar;
 
     private final Supplier<Long> currentTimeSupplier;
+    private int hourToSleep;
+    private int minuteToSleep;
+    private int secondToSleep;
 
     public Rose(long startMillis, long endMillis, Supplier<Long> currentTimeSupplier) {
         this.startMillis = startMillis;
@@ -46,6 +49,12 @@ public class Rose {
 
 
         this.currentTimeSupplier = currentTimeSupplier;
+    }
+
+    public void setTimeToSleep(int hourToSleep, int minuteToSleep, int secondToSleep) {
+        this.hourToSleep = hourToSleep;
+        this.minuteToSleep = minuteToSleep;
+        this.secondToSleep = secondToSleep;
     }
 
     public long elapsedTotal() {
@@ -95,5 +104,24 @@ public class Rose {
         final GregorianCalendar gregorianCalendar = new GregorianCalendar();
         gregorianCalendar.setTimeInMillis(currentMs());
         return weekdays[gregorianCalendar.get(Calendar.DAY_OF_WEEK) - 1];
+    }
+
+    public long elapsedToSleep() {
+        long curr;
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+        gregorianCalendar.setTimeInMillis(curr = currentMs());
+        gregorianCalendar.set(Calendar.HOUR_OF_DAY, hourToSleep);
+        gregorianCalendar.set(Calendar.MINUTE, minuteToSleep);
+        gregorianCalendar.set(Calendar.SECOND, secondToSleep);
+        gregorianCalendar.set(Calendar.MILLISECOND, 0);
+
+        return gregorianCalendar.getTimeInMillis() - curr;
+    }
+
+    public static String millisToTime(long durationInMillis) {
+        int h = (int) ((durationInMillis / (1000 * 60 * 60)) % 24);
+        int m = (int) ((durationInMillis / (1000 * 60)) % 60);
+        int s = (int) ((durationInMillis / 1000) % 60);
+        return String.format("%02d:%02d:%02d", h, m, s);
     }
 }

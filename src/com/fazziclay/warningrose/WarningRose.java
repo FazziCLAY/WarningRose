@@ -21,6 +21,7 @@ public class WarningRose {
 
     private WarningRose() {
         rose = new Rose(TEN_CLASS_START, EGE_PREPARE_END_MILLIS, System::currentTimeMillis);
+        rose.setTimeToSleep(19, 0, 0);
     }
 
     private void run() {
@@ -34,7 +35,7 @@ public class WarningRose {
         frame.setAutoRequestFocus(true);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(400, 190);
+        frame.setSize(450, 230);
 
         JTextArea text = new JTextArea();
         text.setEditable(false);
@@ -43,7 +44,7 @@ public class WarningRose {
         frame.getContentPane().add(text);
 
         while (frame.isVisible()) {
-            text.setText(rose.elapsedSummaryText() + "\n | " + rose.elapsedTotalHours() + " hours" + "\n | " + Math.round(rose.elapsedWeeks()) + " weeks (C: " + rose.getCurrentWeekday() + ")" + "\n | " + (float) rose.endlessPercentage() + "%");
+            text.setText(rose.elapsedSummaryText() + "\n | " + rose.elapsedTotalHours() + " hours" + "\n | " + Math.round(rose.elapsedWeeks()) + " weeks (C: " + rose.getCurrentWeekday() + ")" + "\n | " + (float) rose.endlessPercentage() + "%" + "\nTo sleep: " + Rose.millisToTime(rose.elapsedToSleep()));
             text.invalidate();
             text.validate();
             text.repaint();
